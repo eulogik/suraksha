@@ -17,7 +17,7 @@ def main() -> None:
     p.add_argument("--seed", type=int, default=7)
     p.add_argument("--device", default="mps")
     p.add_argument("--data", default="data/frozen")
-    p.add_argument("--out-dir", default="checkpoints/guard_rlcd")
+    p.add_argument("--out-dir", default="/Volumes/KIOXIA 1TB/suraksha/checkpoints/guard_rlcd")
     p.add_argument("--yes", action="store_true")
     a = p.parse_args()
     if not Path(a.ckpt).exists():
