@@ -46,6 +46,8 @@
 ### 2026-10-07, stock zero-shot on hard v2 test (n=3058, device mps)
 - pi_acc 0.979, tool_acc 0.923, tool macro-F1 0.922, noul AUROC 0.995. Severity_acc 0.759 MAE 0.468 (weak spot). Choice ECE fitted 0.133, score 0.098 (both miss the 0.05 gate). Slices: en 0.934, roman 0.989, codeswitch 0.926, devanagari 1.0. Latency b1 p50 72ms p95 93ms MPS. Raw file eval/baseline_v2_stock.json, backup on Kioxia eval_bak.
 - Honest read: synthetic heldout flatters stock (shared template structure even when disjoint). Training value to prove: severity head, calibration to ECE fitted <=0.05, and robustness on non-synthetic items (human review set + real-world injections). Gates stay as written; do not lower them to match stock.
+### 2026-10-07, G0 warmup started (1000 steps, batch 4, LoRA r16, MPS, Kioxia out)
+- First launch died on a packaging mistake (ran train.py as a script, relative import failed). Relaunched as `python -m suraksha.train`. Early steady state ~1 step/s, loss 1.69 -> 0.83 by step 50. Console: Kioxia g0_console.log.
 <!-- template:
 ### YYYY-MM-DD  ,  <phase> (seed 7, device mps)
 - data: `SHA256SUMS=` <hash>, `LICENSES.json=` <hash>, n_train=, n_test=
