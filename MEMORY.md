@@ -33,6 +33,10 @@
 - `pytest tests/`: 5 passed (taxonomy, normalize, 422, Devanagari routing, server validation).
 - `data_synth_guard --n 200` -> 400 rows; `freeze_data` dedupe 27/400 kept (template overlap expected), `SHA256SUMS`+`LICENSES.json` emitted; UNKNOWN-license fail path verified.
 - `train.py --dry-run` OK; refuses without freeze bundle. Real G0/G1/RLCD/ONNX/GGUF are scaffold stubs (exit with wiring note).
+### 2026-10-07, baseline smoke (stock laya zero shot, seed 7, device mps, n=500 synth rows)
+- pi_acc 0.98 (250 text rows), tool_acc 1.0 (250 tool JSON rows). Slices: en 394 rows pi 1.0, roman 55 rows pi 0.91, devanagari 51 rows pi 1.0. Routing: en 449, multi 51.
+- latency b1 full taxonomy: p50 214ms MPS, p95 252ms. Full payload in eval/baseline_laya.json (local, gitignored).
+- caveat: templates are too easy (shared keywords like evil.com, Ignore previous), so these numbers overstate stock skill. Single hand probe without English cues scored noul 0.319 (miss). Do NOT use this as the gate. Real heldout needs disjoint templates plus unseen tools and obfuscated PII before G0.
 <!-- template:
 ### YYYY-MM-DD  ,  <phase> (seed 7, device mps)
 - data: `SHA256SUMS=` <hash>, `LICENSES.json=` <hash>, n_train=, n_test=
