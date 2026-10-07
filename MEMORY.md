@@ -37,6 +37,12 @@
 - pi_acc 0.98 (250 text rows), tool_acc 1.0 (250 tool JSON rows). Slices: en 394 rows pi 1.0, roman 55 rows pi 0.91, devanagari 51 rows pi 1.0. Routing: en 449, multi 51.
 - latency b1 full taxonomy: p50 214ms MPS, p95 252ms. Full payload in eval/baseline_laya.json (local, gitignored).
 - caveat: templates are too easy (shared keywords like evil.com, Ignore previous), so these numbers overstate stock skill. Single hand probe without English cues scored noul 0.319 (miss). Do NOT use this as the gate. Real heldout needs disjoint templates plus unseen tools and obfuscated PII before G0.
+### 2026-10-07, engine port + export verified (no full training yet)
+- Vendored proven nirnay modules (concepts, lora, losses, rlcd, temps, c2f, deepsup, nope, bytes, hypercube, sgdr) plus guard_data and engine with guard mix, TOOL_RISK c2f, n_labels 4, byte path off.
+- Engine smoke: run_phase_a steps=3 batch=2 on MPS, loss logged, ckpt written. Trained serving path via smoke ckpt returns sane guard probs.
+- ONNX export on smoke ckpt: LEG1 raw-vs-wrapped 37/37, ORT parity 37/37 max_abs 1.9e-4, ort_cpu 87ms vs torch_cpu 110ms.
+- `suraksha scan` verified: static via installed opentrustbench binary plus learned screen ranks evil.txt 1.0 over ok.txt 0.0.
+- Data v2 frozen: 24k train / 3k test unique, disjoint tools and domains, all 4 language slices in test, 1000 stratified human review rows in data/review (unchecked, blocks G1).
 <!-- template:
 ### YYYY-MM-DD  ,  <phase> (seed 7, device mps)
 - data: `SHA256SUMS=` <hash>, `LICENSES.json=` <hash>, n_train=, n_test=
