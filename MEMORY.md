@@ -58,6 +58,7 @@
 - PII any slice <0.80 -> block release; add context-embedded + obfuscated variants, never real PII.
 - Unknown data license -> build fail. No `LICENSES.json` = no training.
 - G0 probe ≤0.60 -> stop/reschedule. En-MVP first; multi/GGUF/Space stretch. Kaggle 2xT4 is $0 fallback.
+- Banking77 ≥0.86 on a guard-only ckpt is unproven (backbone retention bet). If regression fails, mix banking77 rehearsal rows into guard training (train.csv staged on Kioxia).
 
 ## Honesty rules (repeat  ,  violated often)
 - Raw `eval/*.json` + reliability PNG published every run. Zero-shot vs fine-tuned never mixed.
