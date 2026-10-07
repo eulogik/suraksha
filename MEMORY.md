@@ -52,6 +52,9 @@
 - All 250-step probes 1.0, VQ usage healthy (30-32 unique codes per chunk, no collapse). Ckpts phase_a.pt + phase_a_best.pt on Kioxia.
 - Automated data pre-screen (stand-in triage, not the human sign-off): review set balanced 250x4, zero test-domain leakage into train, all rows labeled. Human sign-off stays a release gate before any HF publish.
 - G1 started: resume to 7000 total steps, same config, console Kioxia g1_console.log.
+### 2026-10-07, G1 done: loss 1.69 -> 0.30, probes 1.0 throughout
+- Usage healthy to step ~5000, then chunks 2-4 concentrate ([32,8,25,15] at 5000 to [24,5,6,4] at 7000). Acc never wavers, so dense path carries it, but the VQ bottleneck thins late. Best retention holds step 250 (healthy usage).
+- Decision: G2 runs from phase_a_best.pt (healthy codes), not the final. If heldout says otherwise, revisit. Late-collapse note stays for the card.
 <!-- template:
 ### YYYY-MM-DD  ,  <phase> (seed 7, device mps)
 - data: `SHA256SUMS=` <hash>, `LICENSES.json=` <hash>, n_train=, n_test=
