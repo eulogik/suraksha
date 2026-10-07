@@ -47,7 +47,7 @@ ollama create suraksha-450m -f Modelfile
 ```
 
 ## Architecture constraints
-- Frozen Laya encoder + LoRA r16 on Q/V only. Trainable: LoRA (lr 5e-5) + bottleneck (1e-4) + head (2e-4). Keep nirnay fixes: LayerNorm-affine-free before VQ, load-balancing aux, deep supervision layers 4/8/12.
+- Frozen Laya encoder + LoRA r16 on Q/V only. Engine groups (see PhaseASFT): rest (LoRA+head) 2e-4, pretrained readout 5e-5, bottleneck 1e-4. Keep nirnay fixes: LayerNorm-affine-free before VQ, load-balancing aux, deep supervision layers 4/8/12.
 - G0: 1000 steps LoRA-only guard-noul. G1: 6000 steps full. G2: 50 RLCD steps (REINFORCE group-mean baseline, log+spherical+ranked-prob reward). Checkpoint every 500, abort if accuracy halves.
 - Context: en `max_len=512, head_max_len=192`; multi `1024/256`. Over budget goes to head-truncate + `truncated:true` in response. Never silent-truncate.
 - Per-`(type, n_options)` temperature fit after G2. Report ECE raw + fitted + reliability diagram always.
