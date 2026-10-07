@@ -12,3 +12,5 @@ eval/*.json
 !eval/.gitkeep
 logs/*.log
 .DS_Store
+opentrustbench-report.*
+trust-card.json
