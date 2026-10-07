@@ -48,6 +48,10 @@
 - Honest read: synthetic heldout flatters stock (shared template structure even when disjoint). Training value to prove: severity head, calibration to ECE fitted <=0.05, and robustness on non-synthetic items (human review set + real-world injections). Gates stay as written; do not lower them to match stock.
 ### 2026-10-07, G0 warmup started (1000 steps, batch 4, LoRA r16, MPS, Kioxia out)
 - First launch died on a packaging mistake (ran train.py as a script, relative import failed). Relaunched as `python -m suraksha.train`. Early steady state ~1 step/s, loss 1.69 -> 0.83 by step 50. Console: Kioxia g0_console.log.
+### 2026-10-07, G0 done: loss 1.69 -> 0.57, final probe acc 1.0 (gate >0.60 passes)
+- All 250-step probes 1.0, VQ usage healthy (30-32 unique codes per chunk, no collapse). Ckpts phase_a.pt + phase_a_best.pt on Kioxia.
+- Automated data pre-screen (stand-in triage, not the human sign-off): review set balanced 250x4, zero test-domain leakage into train, all rows labeled. Human sign-off stays a release gate before any HF publish.
+- G1 started: resume to 7000 total steps, same config, console Kioxia g1_console.log.
 <!-- template:
 ### YYYY-MM-DD  ,  <phase> (seed 7, device mps)
 - data: `SHA256SUMS=` <hash>, `LICENSES.json=` <hash>, n_train=, n_test=
