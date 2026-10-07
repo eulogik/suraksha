@@ -1,0 +1,38 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "suraksha"
+version = "0.1.0"
+description = "SURAKSHA 450M: calibrated guard decision model (prompt-injection + MCP tool-risk, Hinglish, ONNX/CPU, Jev-compatible)"
+readme = "README.md"
+license = { text = "Apache-2.0" }
+requires-python = ">=3.10"
+dependencies = [
+  "torch",
+  "transformers>=4.48",
+  "peft",
+  "datasets",
+  "scikit-learn",
+  "onnx",
+  "onnxruntime",
+  "huggingface_hub",
+  "fastapi",
+  "uvicorn",
+  "laya>=0.3.20",
+  "Faker",
+]
+
+[project.optional-dependencies]
+dev = ["pytest", "httpx"]
+
+[project.scripts]
+suraksha-serve = "suraksha.server:main"
+suraksha-scan = "suraksha.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

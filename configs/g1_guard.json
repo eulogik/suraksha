@@ -1,0 +1,28 @@
+{
+  "seed": 7,
+  "device": "mps",
+  "base_model": "convaiinnovations/laya",
+  "phase": "G1",
+  "max_len": 512,
+  "head_max_len": 192,
+  "g0_steps": 1000,
+  "g1_steps": 6000,
+  "batch_size": 4,
+  "gradient_accumulation": 1,
+  "fallback_batch_size": 2,
+  "fallback_accumulation": 2,
+  "lora": { "r": 16, "alpha": 32, "dropout": 0.05, "targets": ["query", "value"] },
+  "optimizer_groups": {
+    "lora": 5e-05,
+    "bottleneck": 0.0001,
+    "head": 0.0002
+  },
+  "scheduler": "cosine",
+  "deep_supervision_layers": [4, 8, 12],
+  "load_balancing_aux_weight": 0.01,
+  "checkpoint_every": 500,
+  "probe_every": 250,
+  "abort_if_accuracy_halves": true,
+  "g0_probe_floor": 0.6,
+  "rlcd_steps": 50
+}
