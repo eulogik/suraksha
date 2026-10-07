@@ -16,6 +16,8 @@ DENY_SUBSTR = ("NC", "SA", "GPL", "NonCommercial", "Non-Commercial")
 LICENSE_HINTS = {
     "en_inject": "Apache-2.0-Ours",
     "guard_hinglish": "Ours-Apache-2.0",
+    "guard_train": "Ours-Apache-2.0",
+    "guard_test": "Ours-Apache-2.0",
     "jailbreak": "MIT",
     "pii": "Ours-Apache-2.0",
     "tool": "Ours-Apache-2.0",

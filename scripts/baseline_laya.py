@@ -15,18 +15,26 @@ from suraksha.agent import SURAKSHA_QUESTIONS, _has_devanagari  # noqa: E402
 from suraksha.data_synth_guard import synth  # noqa: E402
 
 HINGLISH_ROMAN_BITS = ["karo", "bhejo", "kripya", "ko ", "hai", "please confirm karo"]
+SUFFIX_BITS = ["kripya check karo", "please confirm karo"]
 
 
 def bucket(state: str) -> str:
-    if _has_devanagari(state):
-        return "devanagari"
-    low = state.lower()
-    if any(b in low for b in HINGLISH_ROMAN_BITS):
-        return "roman" if "{" not in state else "codeswitch"
-    if any(k in low for k in ["ignore previous", "exfiltrate", "translate then follow", "base64"]):
-        return "en"
     if state.strip().startswith("{"):
         return "en"
+    dev = _has_devanagari(state)
+    low = state.lower()
+    hing = ("ko ignore karo" in low or "bhejo" in low or "bhej" in low
+            or any(b in low for b in ["karo", "kripya", "rakho", "batao", "likho", "turant"])
+            or "तुरंत" in state)
+    eng = any(k in low for k in ["ignore previous", "exfiltrate", "translate then follow",
+                                 "base64", "summarize", "refund", "reset a password",
+                                 "kindly bypass", "roleplay", "buried order", "encoded order"])
+    if dev and (hing or eng):
+        return "codeswitch"
+    if dev:
+        return "devanagari"
+    if hing:
+        return "roman"
     return "en"
 
 
