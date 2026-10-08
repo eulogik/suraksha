@@ -891,6 +891,7 @@ def run_phase_a(
     batch_size: int = 8,
     guard_dir: str = "data/frozen",
     guard_limit: int | None = None,
+    guard_rehearsal: str | None = None,
     out_dir: str = "artifacts/phase_a",
     lora_rank: int = 16,
     lr: float = 1e-3,
@@ -947,6 +948,7 @@ def run_phase_a(
         train_file="guard_train.jsonl",
         seed=seed,
         limit=guard_limit,
+        rehearsal_csv=guard_rehearsal,
     )
     train_ex, held_ex = split_train_heldout(mix, heldout_frac=0.2, seed=seed)
     write_freeze_manifest(out / "freeze_manifest.json", mix)
@@ -1283,6 +1285,7 @@ def run_phase_b(
     batch_size: int = 8,
     guard_dir: str = "data/frozen",
     guard_limit: int | None = None,
+    guard_rehearsal: str | None = None,
     out_dir: str = "artifacts/phase_b",
     lora_rank: int = 4,
     lr: float = 1e-4,
@@ -1310,6 +1313,7 @@ def run_phase_b(
         train_file="guard_train.jsonl",
         seed=seed,
         limit=guard_limit,
+        rehearsal_csv=guard_rehearsal,
     )
     train_ex, held_ex = split_train_heldout(mix, heldout_frac=0.2, seed=seed)
     write_freeze_manifest(out / "freeze_manifest.json", mix)

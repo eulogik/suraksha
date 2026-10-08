@@ -30,8 +30,11 @@ def main() -> None:
     p.add_argument("--phase", choices=("g0", "g1"), default="g0")
     p.add_argument("--out-dir", default="/Volumes/KIOXIA 1TB/suraksha/checkpoints/guard")
     p.add_argument("--yes", action="store_true", help="skip heavy-run confirmation")
+    p.add_argument("--fresh", action="store_true", help="fresh run even for g1 (no resume)")
     p.add_argument("--overwrite", action="store_true")
     p.add_argument("--guard-limit", type=int, default=None)
+    p.add_argument("--rehearsal", default=None,
+                   help="Banking77 train CSV for rehearsal rows (keeps banking skill)")
     a = p.parse_args()
     cfg = json.loads(Path(a.config).read_text())
     frozen = Path(a.data)
@@ -59,13 +62,14 @@ def main() -> None:
             batch_size=int(cfg.get("batch_size", 4)),
             guard_dir=a.data,
             guard_limit=a.guard_limit,
+            guard_rehearsal=a.rehearsal,
             out_dir=a.out_dir,
             lora_rank=int(cfg["lora"]["r"]),
             lr=float(cfg["optimizer_groups"]["head"]),
             seed=a.seed,
             device=a.device,
             checkpoint_every=int(cfg.get("checkpoint_every", 500)),
-            resume=(a.phase == "g1"),
+            resume=(a.phase == "g1" and not a.fresh),
             overwrite=a.overwrite,
             probe_every=int(cfg.get("probe_every", 250)),
             pretrained_lr=float(cfg["optimizer_groups"]["lora"]),
