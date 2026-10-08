@@ -992,11 +992,23 @@ def run_phase_a(
     # batches (mix order is label-sorted → unshuffled batches were single-label).
     random.Random(seed).shuffle(items)
     dev = torch.device(device)
+    # Width-bucketed batches: uniform marker widths per batch keep the
+    # backend on one compiled shape (mixed 4-wide + 77-wide batches stall
+    # MPS). Shuffle the batch order, not the items, for determinism.
+    by_width: dict[int, list[dict[str, Any]]] = {}
+    for item in items:
+        by_width.setdefault(len(item["markers"]), []).append(item)
+    chunks: list[list[dict[str, Any]]] = []
+    for width in sorted(by_width):
+        group = by_width[width]
+        for i in range(0, len(group), batch_size):
+            chunk = group[i : i + batch_size]
+            if len(chunk) < 2:
+                continue
+            chunks.append(chunk)
+    random.Random(seed).shuffle(chunks)
     batches: list[dict[str, torch.Tensor]] = []
-    for i in range(0, len(items), batch_size):
-        chunk = items[i : i + batch_size]
-        if len(chunk) < 2:
-            continue
+    for chunk in chunks:
         batch = collate_examples(chunk, agent.tok.pad_token_id)
         batches.append(
             {k: (v.to(dev) if torch.is_tensor(v) else v) for k, v in batch.items()}
@@ -1352,11 +1364,20 @@ def run_phase_b(
     items = encode_examples(train_ex, agent.tok, max_bytes=model.max_bytes)
     random.Random(seed).shuffle(items)
     dev = torch.device(device)
+    by_width_b: dict[int, list[dict[str, Any]]] = {}
+    for item in items:
+        by_width_b.setdefault(len(item["markers"]), []).append(item)
+    chunks_b: list[list[dict[str, Any]]] = []
+    for width in sorted(by_width_b):
+        group = by_width_b[width]
+        for i in range(0, len(group), batch_size):
+            chunk = group[i : i + batch_size]
+            if len(chunk) < 2:
+                continue
+            chunks_b.append(chunk)
+    random.Random(seed).shuffle(chunks_b)
     batches = []
-    for i in range(0, len(items), batch_size):
-        chunk = items[i : i + batch_size]
-        if len(chunk) < 2:
-            continue
+    for chunk in chunks_b:
         batch = collate_examples(chunk, agent.tok.pad_token_id)
         batches.append(
             {k: (v.to(dev) if torch.is_tensor(v) else v) for k, v in batch.items()}
