@@ -33,6 +33,7 @@ def main() -> None:
     p.add_argument("--fresh", action="store_true", help="fresh run even for g1 (no resume)")
     p.add_argument("--overwrite", action="store_true")
     p.add_argument("--guard-limit", type=int, default=None)
+    p.add_argument("--batch-size", type=int, default=None)
     p.add_argument("--rehearsal", default=None,
                    help="Banking77 train CSV for rehearsal rows (keeps banking skill)")
     a = p.parse_args()
@@ -59,7 +60,7 @@ def main() -> None:
     try:
         result = run_phase_a(
             steps=steps,
-            batch_size=int(cfg.get("batch_size", 4)),
+            batch_size=int(a.batch_size or cfg.get("batch_size", 4)),
             guard_dir=a.data,
             guard_limit=a.guard_limit,
             guard_rehearsal=a.rehearsal,
