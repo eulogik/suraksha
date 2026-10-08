@@ -170,6 +170,7 @@ def build_guard_mix(
     seed: int = 7,
     limit: int | None = None,
     rehearsal_csv: str | Path | None = None,
+    rehearsal_limit: int | None = 2500,
 ) -> list[DecisionExample]:
     """Guard training mix from frozen train file (test file stays eval-only).
 
@@ -179,7 +180,10 @@ def build_guard_mix(
     path = Path(frozen_dir) / train_file
     examples = guard_examples_from_frozen(path, source="guard_train")
     if rehearsal_csv is not None:
-        examples.extend(banking_rehearsal_examples(rehearsal_csv))
+        rh = banking_rehearsal_examples(rehearsal_csv)
+        if rehearsal_limit is not None:
+            rh = sorted(rh, key=lambda e: e.id)[:rehearsal_limit]
+        examples.extend(rh)
     rng = random.Random(seed)
     rng.shuffle(examples)
     return examples[:limit] if limit else examples
