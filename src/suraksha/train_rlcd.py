@@ -18,6 +18,7 @@ def main() -> None:
     p.add_argument("--device", default="mps")
     p.add_argument("--data", default="data/frozen")
     p.add_argument("--out-dir", default="/Volumes/KIOXIA 1TB/suraksha/checkpoints/guard_rlcd")
+    p.add_argument("--n-labels", type=int, default=4)
     p.add_argument("--yes", action="store_true")
     a = p.parse_args()
     if not Path(a.ckpt).exists():
@@ -36,6 +37,7 @@ def main() -> None:
         seed=a.seed,
         device=a.device,
         phase_a_path=a.ckpt,
+        n_labels_bank=a.n_labels,
     )
     h = result["history"]
     print(f"G2_OK steps={len(h)} reward0={h[0]['reward_mean']:.4f} ckpt={result['ckpt']}")

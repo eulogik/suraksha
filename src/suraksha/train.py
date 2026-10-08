@@ -63,6 +63,7 @@ def main() -> None:
             guard_dir=a.data,
             guard_limit=a.guard_limit,
             guard_rehearsal=a.rehearsal,
+            n_labels_bank=(77 if a.rehearsal else 4),
             out_dir=a.out_dir,
             lora_rank=int(cfg["lora"]["r"]),
             lr=float(cfg["optimizer_groups"]["head"]),

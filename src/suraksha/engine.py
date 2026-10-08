@@ -31,7 +31,7 @@ from laya.common import DecisionModel, QTYPES, build_sequence, collate_items, re
 from .bytes import ByteFusion, BytePathConfig, encode_bytes
 from .concepts import ConceptBottleneck, ConceptConfig
 from .coarse2fine import CoarseToFine
-from .guard_data import TOOL_RISK_OPTIONS, DecisionExample, to_laya_question
+from .guard_data import BANKING77_LABELS, TOOL_RISK_OPTIONS, DecisionExample, to_laya_question
 from .deepsup import DEEP_LAYERS, DeepSupervision
 from .losses import CAL_LAMBDA_DEFAULT, LossParts, plan_loss_from_batch
 from .lora import apply_lora, count_frozen, count_trainable
@@ -415,10 +415,12 @@ def encode_examples(
         for i in range(s0, min(s1, len(seq))):
             state_mask[i] = 1
         c2f_eligible = (
-            ex.source == "guard_train"
-            and ex.qtype == "choice"
+            ex.qtype == "choice"
             and isinstance(ex.criteria, dict)
-            and tuple(ex.criteria.keys()) == TOOL_RISK_OPTIONS
+            and (
+                (ex.source == "guard_train" and tuple(ex.criteria.keys()) == TOOL_RISK_OPTIONS)
+                or (ex.source == "banking77_rehearsal" and tuple(ex.criteria.keys()) == BANKING77_LABELS)
+            )
         )
         items.append(
             {
@@ -892,6 +894,7 @@ def run_phase_a(
     guard_dir: str = "data/frozen",
     guard_limit: int | None = None,
     guard_rehearsal: str | None = None,
+    n_labels_bank: int = 4,
     out_dir: str = "artifacts/phase_a",
     lora_rank: int = 16,
     lr: float = 1e-3,
@@ -965,7 +968,7 @@ def run_phase_a(
         use_c2f=True,
         use_byte_path=False,
         max_bytes=DEFAULT_MAX_BYTES,
-        n_labels_bank=4,
+        n_labels_bank=n_labels_bank,
     )
     model.to(torch.device(device))
     if freeze_lora:
@@ -1286,6 +1289,7 @@ def run_phase_b(
     guard_dir: str = "data/frozen",
     guard_limit: int | None = None,
     guard_rehearsal: str | None = None,
+    n_labels_bank: int = 4,
     out_dir: str = "artifacts/phase_b",
     lora_rank: int = 4,
     lr: float = 1e-4,
@@ -1341,7 +1345,7 @@ def run_phase_b(
             use_c2f=True,
             use_byte_path=False,
             max_bytes=DEFAULT_MAX_BYTES,
-            n_labels_bank=4,
+            n_labels_bank=n_labels_bank,
         )
         model.to(torch.device(device))
 
