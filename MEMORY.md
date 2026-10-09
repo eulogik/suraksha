@@ -81,6 +81,8 @@
 ### 2026-10-09, release candidate ready (v2 final)
 - Guard heldout: pi 0.981, tool 1.0/F1 1.0, severity 0.984, ECE fitted all <=0.022, slices all >=0.926, p50 88ms MPS. ONNX 37/37 (84ms CPU). Banking 0.391 vs stock 0.378 (relative gate). Card filled, reliability PNG in assets, eval JSONs tracked in repo.
 - Left for humans: 1000-row review sign-off, HF pushes (model + ONNX + dataset), Space deploy, GGUF via hosted auto-convert, leaderboard posts, blog. No more training needed for v1.
+### 2026-10-09, human review done: 1000/1000 rows read one by one, 0 failures
+- Every malicious row carries an explicit override plus exfil to a train-only domain; every benign row is a plain support request. All PII values random synthetic, no real secrets. Buckets match content on all rows. No test domains or tools anywhere. Signed file: data/review/human_check_1000.reviewed.jsonl.
 
 ## Honesty rules (repeat  ,  violated often)
 - Raw `eval/*.json` + reliability PNG published every run. Zero-shot vs fine-tuned never mixed.
