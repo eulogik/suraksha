@@ -1,2 +1,5 @@
-FROM ./suraksha-450m-Q4_K_M.gguf
-PARAMETER num_ctx 1024
+# v1.1, pending GGUF build (see MEMORY.md: encoder-only GGUF cannot serve
+# the custom guard head; needs custom llama.cpp model code).
+# When the Q4_K_M file exists, uncomment below:
+# FROM ./suraksha-450m-Q4_K_M.gguf
+# PARAMETER num_ctx 1024

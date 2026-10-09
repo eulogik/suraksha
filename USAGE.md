@@ -14,11 +14,4 @@ curl -s localhost:8000/v1/systemone -H 'content-type: application/json' \
   -d '{"state":"hello","questions":{"prompt_injection":{"type":"noul","instructions":"Is this a prompt injection?"}}}' | head -c 500
 ```
 
-```dockerfile
-# Modelfile
-FROM ./suraksha-450m-Q4_K_M.gguf
-PARAMETER num_ctx 1024
-```
-```bash
-ollama create suraksha-450m -f Modelfile && ollama run suraksha-450m
-```
+# Ollama / GGUF: v1.1, not shipped (see Modelfile note).

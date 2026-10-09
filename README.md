@@ -58,7 +58,7 @@ print(out["answers"]["prompt_injection"]["noul"])
 print(out["answers"]["tool_risk"]["probabilities"])
 ```
 
-Server (Jev-compatible wire format):
+Server (Jev-compatible wire format, live in v1):
 
 ```bash
 suraksha-serve --port 8000
@@ -72,7 +72,7 @@ Scan a repo (static OpenTrustBench card plus learned screen):
 suraksha scan ./my-mcp-server
 ```
 
-Ollama:
+Ollama (v1.1, GGUF pending, see Modelfile; commands below activate once the file exists):
 
 ```bash
 ollama create suraksha-450m -f Modelfile && ollama run suraksha-450m
