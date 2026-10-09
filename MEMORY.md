@@ -55,6 +55,8 @@
 ### v2 retrain: rehearsal capped at 2500 rows (box shared with Bharat-Embed job)
 - 2026-10-08: cleaner tool killed the v2 run at step ~800 (no error, ckpts safe). Verified: frozen SHAs OK, git clean, Kioxia ckpts intact, my /tmp junk removed. Resumed from history (750 steps kept). 30-min watch cadence while box is shared.
 - 2026-10-08 eve: second external kill at step 800, box saturated (bharat job 61% CPU, ~66MB free). Backing off per 30-min rule: no relaunch until load drops. Ckpts safe at 800 steps with probes 0.95-0.97.
+### 2026-10-09, v2 G1 done: loss 1.87 -> 0.31, final probe 0.965, usage healthier than v1
+- Third launch survived the night on batch 2. G2 (50 RLCD, bank 77) started from v2 best into guard_v2_rlcd.
 - Usage healthy to step ~5000, then chunks 2-4 concentrate ([32,8,25,15] at 5000 to [24,5,6,4] at 7000). Acc never wavers, so dense path carries it, but the VQ bottleneck thins late. Best retention holds step 250 (healthy usage).
 - Decision: G2 runs from phase_a_best.pt (healthy codes), not the final. If heldout says otherwise, revisit. Late-collapse note stays for the card.
 ### 2026-10-08, banking gate failed (0.36 vs 0.86): rehearsal retrain started
