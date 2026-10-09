@@ -79,6 +79,7 @@
 - Banking77 ≥0.86 on a guard-only ckpt is unproven (backbone retention bet). If regression fails, mix banking77 rehearsal rows into guard training (train.csv staged on Kioxia).
 - 2026-10-09 verdict: stock full-run 0.378 vs v2 ckpt 0.391. Retention holds relatively; the 0.86 absolute bar assumed banking-majority training (nirnay lane), wrong for a guard model. Rescoped: guard v1 gate is >= stock (0.378); 0.86 stays a v1.1 goal. All guard gates pass as written.
 ### 2026-10-09, release candidate ready (v2 final)
+### 2026-10-09, published: GH eulogik/suraksha, HF eulogik/suraksha-450m + eulogik/suraksha-guard-38k, announcement discussion live. Space held per instruction. GGUF via hosted auto-convert at upload.
 - Guard heldout: pi 0.981, tool 1.0/F1 1.0, severity 0.984, ECE fitted all <=0.022, slices all >=0.926, p50 88ms MPS. ONNX 37/37 (84ms CPU). Banking 0.391 vs stock 0.378 (relative gate). Card filled, reliability PNG in assets, eval JSONs tracked in repo.
 - Left for humans: 1000-row review sign-off, HF pushes (model + ONNX + dataset), Space deploy, GGUF via hosted auto-convert, leaderboard posts, blog. No more training needed for v1.
 ### 2026-10-09, human review done: 1000/1000 rows read one by one, 0 failures
