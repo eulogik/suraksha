@@ -1,0 +1,34 @@
+{
+  "model": "stock-laya-zero-shot-via-SurakshaAgent",
+  "n_rows": 500,
+  "seed": 7,
+  "prompt_injection_acc": 0.98,
+  "tool_risk_acc": 1.0,
+  "per_slice": {
+    "devanagari": {
+      "n": 51,
+      "pi_acc": 1.0,
+      "tool_acc": null
+    },
+    "en": {
+      "n": 394,
+      "pi_acc": 1.0,
+      "tool_acc": 1.0
+    },
+    "roman": {
+      "n": 55,
+      "pi_acc": 0.9090909090909091,
+      "tool_acc": null
+    }
+  },
+  "latency_ms": {
+    "n": 500,
+    "p50": 214.17816699977266,
+    "p95": 251.63108299966552
+  },
+  "routing": {
+    "suraksha-en": 449,
+    "suraksha-multi": 51
+  },
+  "note": "zero shot, third party base, never mix with fine tuned numbers"
+}

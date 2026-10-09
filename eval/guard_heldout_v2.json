@@ -1,0 +1,64 @@
+{
+  "checkpoint": "/Volumes/KIOXIA 1TB/suraksha/checkpoints/guard_v2_rlcd/phase_b.pt",
+  "suite": "guard_heldout",
+  "n_rows": 3058,
+  "prompt_injection_acc": 0.9806763285024155,
+  "tool_risk_acc": 1.0,
+  "tool_macro_f1": 1.0,
+  "noul_auroc": 0.9832682926829268,
+  "severity_acc": 0.9843034663178548,
+  "severity_mae": 0.016350555918901243,
+  "per_question": {
+    "noul": {
+      "n": 1035,
+      "accuracy": 0.9806763285024155,
+      "brier": 0.03110181592270532,
+      "ece_raw": 0.016567342995169113,
+      "ece_fitted": 0.015356818385698138,
+      "temperature": 1.7966101694915255,
+      "mean_conf": 0.9955196135265701
+    },
+    "score": {
+      "n": 3058,
+      "accuracy": 0.9843034663178548,
+      "brier": 0.03640980493459777,
+      "ece_raw": 0.027591399607586692,
+      "ece_fitted": 0.01387804085858389,
+      "temperature": 0.5,
+      "mean_conf": 0.9581747874427731
+    },
+    "choice": {
+      "n": 2023,
+      "accuracy": 1.0,
+      "brier": 4.4829461196237975e-08,
+      "ece_raw": 7.212061295103211e-05,
+      "ece_fitted": 2.0499026032183565e-08,
+      "temperature": 0.5,
+      "mean_conf": 0.999927879387049
+    }
+  },
+  "per_slice": {
+    "en": {
+      "n": 2378,
+      "acc": 0.9991589571068125
+    },
+    "devanagari": {
+      "n": 88,
+      "acc": 1.0
+    },
+    "codeswitch": {
+      "n": 243,
+      "acc": 0.9259259259259259
+    },
+    "roman": {
+      "n": 349,
+      "acc": 1.0
+    }
+  },
+  "latency_ms": {
+    "n": 3058,
+    "p50": 87.9194579902105,
+    "p95": 110.98416600725614
+  },
+  "note": "zero-shot and fine-tuned runs are never mixed; checkpoint field says which"
+}

@@ -1,0 +1,9 @@
+{
+  "checkpoint": "/Volumes/KIOXIA 1TB/suraksha/checkpoints/guard_rlcd/phase_b.pt",
+  "n": 3080,
+  "accuracy": 0.36428571428571427,
+  "gate": ">=0.86",
+  "latency_ms": {
+    "p50": 418.75829200216685
+  }
+}

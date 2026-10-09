@@ -8,8 +8,6 @@ checkpoints/
 onnx/
 gguf/
 fp16/
-eval/*.json
-!eval/.gitkeep
 logs/*.log
 .DS_Store
 opentrustbench-report.*

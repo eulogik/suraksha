@@ -1,0 +1,9 @@
+{
+  "checkpoint": "stock-laya-zero-shot",
+  "n": 3080,
+  "accuracy": 0.37792207792207794,
+  "gate": ">=0.86",
+  "latency_ms": {
+    "p50": 172.90150001645088
+  }
+}

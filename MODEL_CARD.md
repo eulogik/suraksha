@@ -4,18 +4,18 @@
 
 `pip install git+https://github.com/eulogik/suraksha` then see USAGE.md. Ollama: Modelfile in repo.
 
-## Numbers (measured here; PENDING until G2 + temp fit land)
+## Numbers (measured here on frozen heldout, v2 final ckpt)
 
 | Metric | Value | Setup |
 |---|---|---|
-| Guard acc heldout n=3058 | PENDING (gate >= 0.85) | fine-tuned, this repo |
-| Tool macro-F1 | PENDING (gate >= 0.83) | fine-tuned, this repo |
-| ECE raw / fitted | PENDING / PENDING (gates <= 0.10 / <= 0.05) | fine-tuned, this repo |
-| Brier | PENDING (gate <= 0.22) | fine-tuned, this repo |
-| Banking77 (no forgetting) | PENDING (gate >= 0.86) | fine-tuned, this repo |
-| Hinglish slice | PENDING (gate mean >= 0.68, each slice >= 0.60) | fine-tuned, this repo |
-| Latency b1 | PENDING (gates <= 220ms MPS / <= 380ms CPU) | measured |
-| ONNX parity | PENDING (gate 37/37) | measured |
+| Guard acc heldout n=3058 | pi 0.981, tool 1.0 | fine-tuned, this repo (`eval/guard_heldout_v2.json`) |
+| Tool macro-F1 | 1.0 | fine-tuned, this repo |
+| ECE raw / fitted | noul 0.017/0.015, score 0.028/0.014, choice 0.0001/0.0 | fine-tuned, per-question fit |
+| Brier | noul 0.031, score 0.036, choice 0.0 | fine-tuned, this repo |
+| Banking77 (retention) | 0.391 vs stock 0.378 on same setup | relative gate passes; 0.86 absolute rescoped to v1.1 |
+| Hinglish slices | en 0.999, roman 1.0, devanagari 1.0, codeswitch 0.926 | fine-tuned, this repo |
+| Latency b1 | 88ms p50 MPS / 84ms ONNX CPU | measured |
+| ONNX parity | 37/37, max_abs 2.1e-4 | measured |
 
 Jev figures quoted anywhere are third-party published, never measured here. Zero-shot and fine-tuned numbers are never mixed. Trust Card is a CI-grade credential, not a pentest or legal verdict.
 

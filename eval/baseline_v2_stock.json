@@ -1,0 +1,64 @@
+{
+  "checkpoint": "stock-laya-zero-shot",
+  "suite": "guard_heldout",
+  "n_rows": 3058,
+  "prompt_injection_acc": 0.978743961352657,
+  "tool_risk_acc": 0.9228868017795353,
+  "tool_macro_f1": 0.9216340748474141,
+  "noul_auroc": 0.9946341463414634,
+  "severity_acc": 0.7586657946370177,
+  "severity_mae": 0.4676258992805755,
+  "per_question": {
+    "noul": {
+      "n": 1035,
+      "accuracy": 0.978743961352657,
+      "brier": 0.033238899748792274,
+      "ece_raw": 0.014400772946859843,
+      "ece_fitted": 0.008819002548329204,
+      "temperature": 1.5677966101694916,
+      "mean_conf": 0.990136425120773
+    },
+    "score": {
+      "n": 3058,
+      "accuracy": 0.7586657946370177,
+      "brier": 0.2786646663276651,
+      "ece_raw": 0.13738051013734467,
+      "ece_fitted": 0.09777624835709776,
+      "temperature": 0.576271186440678,
+      "mean_conf": 0.7055799869195553
+    },
+    "choice": {
+      "n": 2023,
+      "accuracy": 0.9228868017795353,
+      "brier": 0.23809229982204644,
+      "ece_raw": 0.2604542758279782,
+      "ece_fitted": 0.1328964069568061,
+      "temperature": 0.5,
+      "mean_conf": 0.6624325259515571
+    }
+  },
+  "per_slice": {
+    "en": {
+      "n": 2378,
+      "acc": 0.9343986543313709
+    },
+    "devanagari": {
+      "n": 88,
+      "acc": 1.0
+    },
+    "codeswitch": {
+      "n": 243,
+      "acc": 0.9259259259259259
+    },
+    "roman": {
+      "n": 349,
+      "acc": 0.9885386819484241
+    }
+  },
+  "latency_ms": {
+    "n": 3058,
+    "p50": 71.54599999921629,
+    "p95": 93.43120899939095
+  },
+  "note": "zero-shot and fine-tuned runs are never mixed; checkpoint field says which"
+}
