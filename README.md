@@ -72,7 +72,7 @@ Scan a repo (static OpenTrustBench card plus learned screen):
 suraksha scan ./my-mcp-server
 ```
 
-Ollama (v1.1, GGUF pending, see Modelfile; commands below activate once the file exists):
+Ollama (needs Ollama with current llama.cpp; stock builds reject decision head blocks, verified):
 
 ```bash
 ollama create suraksha-450m -f Modelfile && ollama run suraksha-450m

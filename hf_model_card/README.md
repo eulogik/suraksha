@@ -51,7 +51,7 @@ model-index:
 
 450M open-weight guard by [Eulogik](https://eulogik.com). One forward pass turns a state plus typed questions into calibrated probabilities: P(prompt-injection), P(jailbreak), P(PII-leak), P(tool-risk). English plus Hinglish plus Hindi. Apache-2.0, self-hosted, $0.
 
-Code and full evals: [github.com/eulogik/suraksha](https://github.com/eulogik/suraksha). Dataset: [eulogik/suraksha-guard-38k](https://huggingface.co/datasets/eulogik/suraksha-guard-38k).
+Code and full evals: [github.com/eulogik/suraksha](https://github.com/eulogik/suraksha). Dataset: [eulogik/suraksha-guard-38k](https://huggingface.co/datasets/eulogik/suraksha-guard-38k). GGUF: [eulogik/suraksha-450m-GGUF](https://huggingface.co/eulogik/suraksha-450m-GGUF) (74/74 parity, serve with recent llama-server).
 
 ## What is in this repo
 

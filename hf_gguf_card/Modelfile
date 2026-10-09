@@ -1,0 +1,2 @@
+FROM ./suraksha-450m-Q4_K_M.gguf
+PARAMETER num_ctx 1024

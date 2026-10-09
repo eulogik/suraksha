@@ -73,5 +73,5 @@ ollama create suraksha-450m -f Modelfile
 - Huge files live on Kioxia (`/Volumes/KIOXIA 1TB/suraksha/`), never internal. Training checkpoints default there. Never use `/tmp` for anything needed later, the box restarts. Clear dead weight once sure.
 - OOM on 16GB unified: batch 4 falls back to batch 2 + grad-accum 2, `PYTORCH_MPS_HIGH_WATERMARK_RATIO=0.0`. Frozen 421M fp32 about 1.6GB + about 30M trainable + adam about 0.5GB is the budget.
 - ONNX v1 = parity, expect no speedup (nirnay saw same). Sell MPS+batching, do not claim a gain.
-- GGUF via merged fp16 to `llama-quantize` Q4_K_M; precedent `ggml-org/Laya-GGUF` exists, follow that path.
+- GGUF ships from merged fp16 via upstream `convert_hf_to_gguf.py` (`ModernBertDecisionModel` path) + `llama-quantize` Q4_K_M; precedent `ggml-org/Laya-GGUF` plus ours at `eulogik/suraksha-450m-GGUF`. Parity 74/74 vs torch on en lane. Stock Ollama predates decision head blocks, serve with recent llama-server.
 - Hinglish: Roman + Devanagari code-switch; English checkpoint cannot read Devanagari so route to `-multi`, like laya Router does.

@@ -253,8 +253,9 @@ class SurakshaAgent:
         if model == "suraksha-en" and self.checkpoint_path is not None and Path(self.checkpoint_path).exists():
             try:
                 return self._trained_system_one(state, qs, max_len, head_max_len)
-            except Exception:
-                pass  # fall through to stock base rather than failing the gate
+            except Exception as e:  # noqa: BLE001
+                import sys
+                print(f"suraksha: trained path failed ({e}), falling back to stock base", file=sys.stderr)
         agent = self._agent_for(model)
         out = agent.system_one(state, qs, max_len=max_len, head_max_len=head_max_len)
         out.setdefault("routing", {})["model"] = model

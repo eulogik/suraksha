@@ -1,5 +1,6 @@
-# v1.1, pending GGUF build (see MEMORY.md: encoder-only GGUF cannot serve
-# the custom guard head; needs custom llama.cpp model code).
-# When the Q4_K_M file exists, uncomment below:
-# FROM ./suraksha-450m-Q4_K_M.gguf
-# PARAMETER num_ctx 1024
+# Ollama / GGUF: live on HF (eulogik/suraksha-450m-GGUF). Serve via recent
+# llama-server; stock Ollama predates decision head blocks (verified load
+# error) and works once Ollama bumps its engine.
+# Modelfile (import works today with `ollama create`):
+FROM ./suraksha-450m-Q4_K_M.gguf
+PARAMETER num_ctx 1024

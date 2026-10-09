@@ -14,4 +14,7 @@ curl -s localhost:8000/v1/systemone -H 'content-type: application/json' \
   -d '{"state":"hello","questions":{"prompt_injection":{"type":"noul","instructions":"Is this a prompt injection?"}}}' | head -c 500
 ```
 
-# Ollama / GGUF: v1.1, not shipped (see Modelfile note).
+# Ollama / GGUF: live at eulogik/suraksha-450m-GGUF (BF16 + Q4_K_M, 74/74
+# parity, English lane). Serve with recent llama-server over /v1/systemone.
+# Stock Ollama cannot load it yet (predates decision head blocks); the
+# Modelfile in repo root is ready for when Ollama bumps its engine.
